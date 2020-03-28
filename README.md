@@ -53,3 +53,15 @@ getMovies = async () =>{
 }
 ```
 ```npm run deploy```
+
+### Router-DOM
+```npm install react-router-dom```
+- <Route /> : 렌더링할 스크린과, props가 들어감
+- 기존 HTML a tag는 페이지를 새로고침해서, 리액트 페이지가 죽고 다시 로딩됨 ```LINK```활용
+```js
+import { Link } from "react-router-dom";
+<Link to="./">Home<Link>
+```
+## Ref
+- https://velopert.com/3612
+- https://academy.nomadcoders.co/courses/216871/lectures/10881387
