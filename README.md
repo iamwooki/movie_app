@@ -24,7 +24,31 @@ npx create-react-app movie_app
 ### Axios
 ```npm i axios```
 ```js
-componentDidMount(){
-    axios.get("http://yts-proxy.now.sh/list_movies.json")
+//async : 비동기, await 지점에서
+getMovies = async () =>{
+    const movies = await axios.get("http://yts-proxy.now.sh/list_movies.json")
+  }
+```
+
+### Build
+```npm run build```
+
+### git-page에 올리기
+- ```git remote -v``` 경로 먼저 확인
+- gh-pages 설치 ```npm i gh-pages```
+- ```package.json``` 수정
+```json
+//package.json
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build"
+  },
+.
+.
+.
+ "homepage": "https://iamwooki.github.io/movie_app"
 }
 ```
+```npm run deploy```
