@@ -1,59 +1,53 @@
 import React from 'react';
 import PropTypes from "prop-types";
+import axios from "axios";
+import Movie from "./Movie";
+import "./App.css";
 
-function Movie({id, name, picture}){
-  return (
-    <div>
-      <h2>I like {name}</h2>
-      <img src={picture} />
-    </div>
-  );
-}
-
-const movieILike = [
-  {
-    id:1,
-    name: "Titanic",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/RMS_Titanic_3.jpg/600px-RMS_Titanic_3.jpg",
-    ratings:5.0
-  },
-  {
-    id:2,
-    name: "Harry Porter",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/RMS_Titanic_3.jpg/600px-RMS_Titanic_3.jpg",
-      ratings:5.0
-  },
-  {
-    id:3,
-    name: "Avatar",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/RMS_Titanic_3.jpg/600px-RMS_Titanic_3.jpg",
-      ratings:5.0
-  },
-  {
-    id:4,
-    name: "Avengers",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/RMS_Titanic_3.jpg/600px-RMS_Titanic_3.jpg",
-      ratings:5.0
+class App extends React.Component{
+  state = {
+    isLoading: true,
+    movies: []
+  };
+  getMovies = async () =>{
+    const {
+      data:{
+        data: {movies}
+      }
+    } = await axios.get("http://yts-proxy.now.sh/list_movies.json?sort_by=rating")
+    this.setState({movies, isLoading : false})
   }
-];
 
-Movie.PropTypes = {
-  name: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-  ratings: PropTypes.string.isRequired
+  componentDidMount(){
+    this.getMovies();
+  }
+  render() {
+    const { isLoading, movies } = this.state;
+    return (
+      <section className="container">
+        {this.state.isLoading ? (
+          <div className="lodaer">
+            <spann className="loader_text">"JSON Loading..."</spann>
+          </div>
+        ) : (
+          <div className="movies">
+            {movies.map(movie => (
+              <Movie
+                key={movie.id}
+                id={movie.id} 
+                year={movie.year}
+                title={movie.title} 
+                summary={movie.summary} 
+                poster={movie.medium_cover_image}
+                genres={movie.genres}
+              />
+            ))}
+          </div>
+          )}
+      </section>
+    );
+  }
 }
-function App() {
-  return (
-    <div>
-      {movieILike.map(movie =>(
-        <Movie key={movie.id} name={movie.name} picture={movie.image} /> 
-        ))}
-      </div>
-  );
-}
+
 
 export default App;
