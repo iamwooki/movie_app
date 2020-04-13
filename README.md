@@ -66,3 +66,4 @@ import { Link } from "react-router-dom";
 ## Ref
 - https://velopert.com/3612
 - https://academy.nomadcoders.co/courses/216871/lectures/10881387
+- http://jeonghwan-kim.github.io/2018/07/16/react-app-overview.html
