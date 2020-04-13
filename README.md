@@ -21,6 +21,7 @@ npx create-react-app movie_app
 ### [React Component LifeCycle](https://reactjs.org/docs/react-component.html#the-component-lifecycle)
 - render()-> componentDidMount()
 - setState() -> render() -> componentDidUpdate()
+- ref : https://velopert.com/3631
 
 ### Axios
 ```npm i axios```
